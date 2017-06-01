@@ -1,10 +1,35 @@
 class Animal
-  def say(word1:, word2: 'default value', hash: {})
-    puts word1
-    puts hash.inspect
-    puts word2
+  def initialize(name)
+    puts "animal #{name} is born!"
   end
+
+  def Animal.walk
+    puts 'I am walking...'
+  end
+
+  def say(phrase = '')
+    return if phrase.empty?
+    "I am saying: #{format phrase}"
+  end
+
+  def with_object(another_object)
+    another_object.format 'test'
+  end
+
+  #private
+  protected
+
+  def format(string)
+    string.upcase
+  end
+
+  #protected :format, :with_object, :say
 end
 
-new_animal = Animal.new
-new_animal.say word1: 'word1', hash: {key: 'value', key2: 5}
+#Animal.walk
+new_animal = Animal.new 'some name'
+new_animal.walk
+# another_animal = Animal.new 'another name'
+# puts new_animal.with_object another_animal
+# #puts new_animal.say 'hello!'
+# puts new_animal.format 'test'
