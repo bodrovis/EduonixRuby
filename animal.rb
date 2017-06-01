@@ -1,35 +1,35 @@
 class Animal
-  def initialize(name)
-    puts "animal #{name} is born!"
+  @@type = :cat
+  attr_accessor :name, :age
+
+  def initialize(name, age = 0)
+    @name = name
+    @age = age
   end
 
-  def Animal.walk
-    puts 'I am walking...'
+  def get_older!
+    @age += 1
   end
 
-  def say(phrase = '')
-    return if phrase.empty?
-    "I am saying: #{format phrase}"
+  def Animal.change_type!(new_type)
+    @@type = new_type
   end
 
-  def with_object(another_object)
-    another_object.format 'test'
+  def type
+    @@type
   end
-
-  #private
-  protected
-
-  def format(string)
-    string.upcase
-  end
-
-  #protected :format, :with_object, :say
 end
 
-#Animal.walk
-new_animal = Animal.new 'some name'
-new_animal.walk
-# another_animal = Animal.new 'another name'
-# puts new_animal.with_object another_animal
-# #puts new_animal.say 'hello!'
-# puts new_animal.format 'test'
+spot = Animal.new 'spot', 5
+buttons = Animal.new 'buttons'
+Animal.change_type! :dog
+puts spot.type
+# ===========
+puts "Button's type: #{buttons.type}"
+#spot.get_older!
+#puts spot.age
+# spot.name = 'new name...'
+# puts spot.name
+#
+# buttons = Animal.new 'buttons'
+# puts buttons.name
