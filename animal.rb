@@ -1,5 +1,4 @@
 class Animal
-  @@type = :cat
   attr_accessor :name, :age
 
   def initialize(name, age = 0)
@@ -7,29 +6,46 @@ class Animal
     @age = age
   end
 
-  def get_older!
-    @age += 1
+  def self.change_type!
+
+  end
+  def info
+    "Name: #{self.name}, age: #{age}"
   end
 
-  def Animal.change_type!(new_type)
-    @@type = new_type
+  def say
+    'Generic saying...'
   end
 
-  def type
-    @@type
+  def walk_to(somewhere)
+    puts "[PARENT] Walking to #{somewhere}"
   end
 end
 
-spot = Animal.new 'spot', 5
-buttons = Animal.new 'buttons'
-Animal.change_type! :dog
-puts spot.type
-# ===========
-puts "Button's type: #{buttons.type}"
-#spot.get_older!
-#puts spot.age
-# spot.name = 'new name...'
-# puts spot.name
-#
-# buttons = Animal.new 'buttons'
-# puts buttons.name
+class Cat < Animal
+  def walk_to(somewhere)
+    puts "[CHILD] Walking to #{somewhere}"
+    super(somewhere)
+  end
+  def say
+    'meow'
+  end
+end
+
+class Dog < Animal
+  def say
+    'woof'
+  end
+end
+
+buttons = Cat.new 'buttons', 5
+puts buttons.info
+
+
+puts buttons.class. # => Cat
+superclass. # => Animal
+superclass. # => Object
+superclass. # => BasicObject
+superclass.inspect # => nil
+
+#puts buttons.walk_to 'far away'
