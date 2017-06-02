@@ -1,28 +1,15 @@
-module Utils
-  def format_name(name)
-    name.strip.capitalize
-  end
-end
-
-module AnimalUtils
-  def change_type!
-    puts 'changing type...'
-  end
-end
-
-class Human
-  include Utils
-end
-
 module Zoo
   class Animal
-    include Utils
-    extend AnimalUtils
+    include Comparable
     attr_accessor :name, :age
 
     def initialize(name, age = 0)
-      @name = format_name name
+      @name = name
       @age = age
+    end
+
+    def <=>(other_animal)
+      self.age <=> other_animal.age
     end
 
     def say
@@ -52,4 +39,5 @@ module Zoo
 end
 
 buttons = Zoo::Cat.new 'buttons', 5
-puts buttons.name
+spot  = Zoo::Cat.new 'spot', 3
+puts buttons < spot
