@@ -4,33 +4,21 @@ module GameOfStones
 
     def initialize
       welcoming_message
-      @players = initialize_players
+      @players = GameOfStones::Collections::Players.new
       @pile = GameOfStones::Models::Pile.new
     end
 
     def start!
-      players.cycle do |player|
-        player.make_turn!(pile)
-
-        if pile.empty?
-          player.lost
-          break
-        end
-      end
+      loser = players.make_turns_until(pile) { |current_pile| current_pile.empty? }
+      puts "\nPlayer #{loser.name} lost..."
+      puts players.info
     end
 
     private
 
-    def initialize_players
-      2.times.map do |i|
-        puts "Player #{i + 1}, please enter your name:"
-        GameOfStones::Models::Player.new(gets.strip)
-      end
-    end
-
     def welcoming_message
       puts '*' * 29
-      puts "WELCOME TO THE GAME OF STONES"
+      puts 'WELCOME TO THE GAME OF STONES'
       puts '*' * 29
     end
   end
