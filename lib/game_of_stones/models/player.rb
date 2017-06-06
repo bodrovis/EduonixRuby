@@ -4,16 +4,22 @@ module GameOfStones
       attr_reader :name
 
       def initialize(name)
+        name.strip!
+        raise IncorrectName if name.empty?
         @name = name
         @time_per_turn = []
       end
 
-      def make_turn!(pile)
+      def make_turn(pile)
         @time_per_turn << measure_time { take_stones_from(pile) }
       end
 
       def avg_time_per_turn
-        @time_per_turn.reduce(:+) / @time_per_turn.length
+        begin
+          @time_per_turn.reduce(:+) / @time_per_turn.length
+        rescue ZeroDivisionError
+          'n/a'
+        end
       end
 
       def info
@@ -34,18 +40,20 @@ module GameOfStones
 
       def take_stones_from(pile)
         puts "The current number of stones is: #{pile.stones}"
-        puts "Player #{self.name}, it is your turn now!"
+        puts "Player #{name}, it is your turn now!"
 
-        number = loop do
-          number = gets.to_i
-          if pile.has_enough_stones? number
-            break number
-          else
-            puts "Please enter the correct number!"
-          end
+        begin
+          pile.take! gets
+        rescue GameOfStones::Models::Pile::IncorrectNumberOfStones => e
+          puts e
+          retry
         end
+      end
 
-        pile.take!(number)
+      class IncorrectName < StandardError
+        def to_s
+          'The name cannot be empty!'
+        end
       end
     end
   end

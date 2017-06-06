@@ -16,11 +16,24 @@ module GameOfStones
       end
 
       def take!(number)
-        @stones -= number if has_enough_stones?(number)
+        number = number.to_i
+        raise IncorrectNumberOfStones.new(@stones) unless has_enough_stones?(number)
+        @stones -= number
       end
 
       def empty?
         stones.zero?
+      end
+
+      class IncorrectNumberOfStones < StandardError
+        def initialize(stones)
+          @stones = stones
+        end
+
+        def to_s
+          "You've entered incorrect number of stones. The possible value is from " +
+            "#{Pile::MIN_TO_TAKE} to #{[Pile::MAX_TO_TAKE, @stones].min}"
+        end
       end
     end
   end
