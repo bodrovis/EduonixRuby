@@ -5,7 +5,7 @@ module GameOfStones
       MAX_TO_TAKE = 3
       MIN_TO_TAKE = 1
 
-      attr_accessor :stones
+      attr_reader :stones
 
       def initialize
         @stones = STONES_NUM
