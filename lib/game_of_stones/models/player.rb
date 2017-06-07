@@ -26,6 +26,10 @@ module GameOfStones
         "\n\nPlayer: #{name}\nAvg. time per turn: #{avg_time_per_turn}"
       end
 
+      def to_s
+        name
+      end
+
       private
 
       def measure_time

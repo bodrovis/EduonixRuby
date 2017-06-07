@@ -1,6 +1,6 @@
 module GameOfStones
   class Game
-    attr_reader :pile, :players
+    attr_reader :pile, :players, :loser
 
     def initialize
       welcoming_message
@@ -9,17 +9,21 @@ module GameOfStones
     end
 
     def start!
-      loser = players.make_turns_until(pile) { |current_pile| current_pile.empty? }
-      puts "\nPlayer #{loser.name} lost..."
-      puts players.info
+      @loser = players.make_turns_until(pile) { |current_pile| current_pile.empty? }
+    end
+
+    def render_statistics(ios = [:file, :terminal])
+      GameOfStones::Utils::Printer.print ["\nPlayer #{loser} lost!", players.info], ios
     end
 
     private
 
     def welcoming_message
-      puts '*' * 29
-      puts 'WELCOME TO THE GAME OF STONES'
-      puts '*' * 29
+      GameOfStones::Utils::Printer.print [
+                                             '*' * 29,
+                                             'WELCOME TO THE GAME OF STONES',
+                                             '*' * 29
+                                         ]
     end
   end
 end
