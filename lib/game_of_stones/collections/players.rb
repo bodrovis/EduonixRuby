@@ -30,7 +30,7 @@ module GameOfStones
         2.times.map do |i|
           begin
             puts "Player #{i + 1}, please enter your name:"
-            GameOfStones::Models::Player.new(gets)
+            GameOfStones::Models::Player.new($stdin.gets)
           rescue GameOfStones::Models::Player::IncorrectName => e
             puts e.message
             retry

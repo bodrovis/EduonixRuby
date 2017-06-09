@@ -2,9 +2,9 @@ module GameOfStones
   class Game
     attr_reader :pile, :players, :loser
 
-    def initialize
+    def initialize(argv)
       welcoming_message
-      @options = GameOfStones::GameOptions.new
+      @options = GameOfStones::GameOptions.new(argv)
       @players = GameOfStones::Collections::Players.new
       @pile = GameOfStones::Models::Pile.new(@options)
     end

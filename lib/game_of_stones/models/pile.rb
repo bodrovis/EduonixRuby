@@ -5,8 +5,8 @@ module GameOfStones
 
       def initialize(options)
         @stones = options.stones
-        @max_take = options.max_take
-        @min_take = options.min_take
+        @max_take = options.max
+        @min_take = options.min
       end
 
       def has_enough_stones?(number)

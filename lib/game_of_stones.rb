@@ -1,4 +1,5 @@
 require 'yaml'
+require 'slop'
 
 require_relative 'game_of_stones/utils/hash'
 require_relative 'game_of_stones/utils/printer'
@@ -9,7 +10,7 @@ require_relative 'game_of_stones/collections/players'
 require_relative 'game_of_stones/game'
 
 module GameOfStones
-  AVAILABLE_SETTINGS = [:stones, :max_take, :min_take]
+  AVAILABLE_SETTINGS = [:stones, :max, :min]
   class << self
     def load_settings!
       const_set(:CONFIG, {})

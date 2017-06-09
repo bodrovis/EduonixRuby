@@ -2,6 +2,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'game_of_stones'
 
-new_game = GameOfStones::Game.new
+new_game = GameOfStones::Game.new(ARGV)
 new_game.start!
 new_game.render_statistics

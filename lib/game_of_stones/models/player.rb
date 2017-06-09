@@ -47,7 +47,7 @@ module GameOfStones
         say "Player #{name}, it is your turn now!"
 
         begin
-          pile.take! gets
+          pile.take! $stdin.gets
         rescue GameOfStones::Models::Pile::IncorrectNumberOfStones => e
           say e, :warning
           retry
