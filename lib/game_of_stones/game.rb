@@ -13,17 +13,17 @@ module GameOfStones
     end
 
     def render_statistics(ios = [:file, :terminal])
-      GameOfStones::Utils::Printer.print ["\nPlayer #{loser} lost!", players.info], ios
+      say ["\nPlayer #{loser} lost!", players.info], ios
     end
 
     private
 
     def welcoming_message
-      GameOfStones::Utils::Printer.print [
-                                             '*' * 29,
-                                             'WELCOME TO THE GAME OF STONES',
-                                             '*' * 29
-                                         ]
+      say [
+              '*' * 29,
+              'WELCOME TO THE GAME OF STONES',
+              '*' * 29
+          ]
     end
   end
 end

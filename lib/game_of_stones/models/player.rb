@@ -37,19 +37,19 @@ module GameOfStones
           time_before = Time.now
           yield
           waited_for = Time.now - time_before
-          puts "Time: #{waited_for}"
+          say "Time: #{waited_for}"
           waited_for
         end
       end
 
       def take_stones_from(pile)
-        puts "The current number of stones is: #{pile.stones}"
-        puts "Player #{name}, it is your turn now!"
+        say "The current number of stones is: #{pile.stones}"
+        say "Player #{name}, it is your turn now!"
 
         begin
           pile.take! gets
         rescue GameOfStones::Models::Pile::IncorrectNumberOfStones => e
-          puts e
+          say e, :warning
           retry
         end
       end

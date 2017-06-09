@@ -1,9 +1,0 @@
-
-Player test2 lost!
-
-
-Player: test
-Avg. time per turn: 0.35502049999999996
-
-Player: test2
-Avg. time per turn: 0.5670324999999999
