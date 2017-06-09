@@ -1,1 +1,0 @@
-puts eval(gets.strip)
