@@ -4,8 +4,9 @@ module GameOfStones
 
     def initialize
       welcoming_message
+      @options = GameOfStones::GameOptions.new
       @players = GameOfStones::Collections::Players.new
-      @pile = GameOfStones::Models::Pile.new
+      @pile = GameOfStones::Models::Pile.new(@options)
     end
 
     def start!
